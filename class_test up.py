@@ -39,6 +39,7 @@ class newBlock:
         # commence en (6,19)
         self.positions = give_position(forme, tablo)
         self.forme = forme
+        self.orient = 'DOWN'
         
 
 
@@ -85,14 +86,21 @@ class newBlock:
 
 
     def rotation(self, forme):
-        # test de possibilité de rotation i.e. repousse le bloc si y a pas la place
-        pass
+        # test de possibilité de rotation + update positions
+        if forme=='laBarre':
+            if self.orient=='DOWN':
+                positionsTest = []
+                for (x,y) in self.positions:
+                    positionsTest.append((x,y))
+                    
 
 
 def give_position(forme, tablo):  # forme vient de CONST et tablo est le tablo utilisé
     for (x,y) in forme:
         tablo.tablo[y][x] = 1 # ajouter code couleur ...a definir
     return(forme)
+    
+
     
         
 
