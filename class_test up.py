@@ -23,7 +23,8 @@ class tablo:
             self.score = int(x)
         # a continuer pour les combos et les scores
 
-    def update(self, positionsAvant, positionsApres): # update position du bloc + test si le bloc a fini de tomber      
+    def update(self, estArrive=False, positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
+        
         for (x,y) in positionsAvant:
             self.tablo[y][x] = 0
         for (x,y) in positionsApres:
@@ -47,7 +48,7 @@ class newBlock:
         if direction == 'BAS':
             peutDescendre = True
             for (x,y) in self.positions[self.orient]:
-                if tablo[y-1][x]==0:
+                if y>0 and tablo[y-1][x]==0:
                     continue
                 else:
                     peutDescendre = False
@@ -57,7 +58,9 @@ class newBlock:
                 for cle in self.positions.keys():
                     for i in range(4):
                         self.positions[cle][i] = (x,y) = (x,y-1)
-                tablo.update(posAvant, self.positions[self.orient])     
+                tablo.update(posAvant, self.positions[self.orient]) 
+            else:
+                tablo.update(estArrive=True)    # les argument à revoir
             
         elif direction == 'DROITE':
             for (x,y) in self.positions[self.orient]:
