@@ -1,5 +1,5 @@
 import pygame as pyg
-from CONST import *
+import CONST
 
 class tablo:
 
@@ -11,8 +11,8 @@ class tablo:
     # Actualise le tablo, les scores/combos
     def test(self):
         combo = 0
-        for lignes in self.tablo:
-            if not 0 in lignes:
+        for i in range(len(self.tablo)): # remplacer len jailaflemmedecompter
+            if not 0 in self.tablo[i]:
                 for j in range(i,19):
                     self.tablo[j] = self.tablo[j+1] # ca marche paa 
                 self.score += int(x)
@@ -23,19 +23,23 @@ class tablo:
             self.score = int(x)
         # a continuer pour les combos et les scores
 
-    def update(*positions): # update position du bloc + test si le bloc a fini de tomber      
-        return
+    def update(self, positionsAvant, positionsApres): # update position du bloc + test si le bloc a fini de tomber      
+        for (x,y) in positionsAvant:
+            self.tablo[y][x] = 0
+        for (x,y) in positionsApres:
+            self.tablo[y][x] = 1 # + la couleur
 
 
 
 
 class newBlock:
 
-    def __init__(self, forme):
+    def __init__(self, forme, tablo):
         #donne une position de chaque bloc dans le tablo sous forme d'une liste de tuple = (x,y)
         # commence en (6,19)
-        self.positions = [(0,0),(0,0),]   #givePositions(forme) + integrer dans tablo #Zach ou Brice
+        self.positions = give_position(forme, tablo)
         self.forme = forme
+        self.orient = 'DOWN'
         
 
 
@@ -49,9 +53,10 @@ class newBlock:
                     peutDescendre = False
                     break
             if peutDescendre:
-                tablo.update() # ajouter les arguments 
+                posAvant = self.positions
                 for (x,y) in self.positions:
                     y -= 1
+                tablo.update(posAvant, self.positions)     
             
         elif direction == 'DROITE':
             for (x,y) in self.positions:
@@ -61,9 +66,10 @@ class newBlock:
                     peutDroite = False
                     break
             if peutDroite:
-                tablo.update() # ajouter les arguments
+                posAvant = self.positions
                 for (x,y) in self.positions:
                     x += 1
+                tablo.update(posAvant, self.positions)
 
         elif direction=='GAUCHE':
             for (x,y) in self.positions:
@@ -73,12 +79,29 @@ class newBlock:
                     peutGauche = False
                     break
             if peutGauche:
-                tablo.update() # ajouter les arguments
+                posAvant = self.positions
                 for (x,y) in self.positions:
                     x -= 1 
+                tablo.update(posAvant, self.positions)
 
 
-    def rotation(forme):
-        # test de possibilité de rotation i.e. repousse le bloc si y a pas la place
-        pass
+    def rotation(self, forme):
+        # test de possibilité de rotation + update positions
+        if forme=='laBarre':
+            if self.orient=='DOWN':
+                positionsTest = []
+                for (x,y) in self.positions:
+                    positionsTest.append((x,y))
+                    
+
+
+def give_position(forme, tablo):  # forme vient de CONST et tablo est le tablo utilisé
+    for (x,y) in forme:
+        tablo.tablo[y][x] = 1 # ajouter code couleur ...a definir
+    return(forme)
+    
+
+    
+        
+
 
