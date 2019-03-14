@@ -24,11 +24,14 @@ class tablo:
         # a continuer pour les combos et les scores
 
     def update(self, estArrive=False, positionsAvant=[], positionsApres=[]): # update position du bloc + test si le bloc a fini de tomber      
-        
-        for (x,y) in positionsAvant:
-            self.tablo[y][x] = 0
-        for (x,y) in positionsApres:
-            self.tablo[y][x] = 1 # + la couleur
+        if not estArrive:
+            for (x,y) in positionsAvant:
+                self.tablo[y][x] = 0
+            for (x,y) in positionsApres:
+                self.tablo[y][x] = 1 # + la couleur
+            return(False)
+        else:
+            return(True)
 
 
 
