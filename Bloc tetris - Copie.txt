@@ -1,0 +1,101 @@
+#coul du text : 
+#cool=[BLACK, WHITE, GREEN, BLUE, RED, GREY, PURPLE]
+#x=random.randint(0,6)
+
+
+import pygame
+
+# Initialise pygame
+pygame.init()
+
+# Définir quelque couleurs
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+BLUE =  (  0,   0, 255)
+GREY = (128, 128, 128)
+PURPLE = (98, 14, 104)
+
+text = create_text(" Tetris ", font_preferences, 72, couleur)
+print(x)
+
+# Mesures de la fenêtre
+size = [850, 750]
+screen = pygame.display.set_mode(size)
+
+#images boutons:
+	# coordonn�es:
+x_bt1, y_bt1= (425, 150)	# Titre: Tetris
+
+x_bt2, y_bt2= (425, 350)	# Play
+
+x_bt3, y_bt3= (425, 450)	# Option
+
+	#images associ�es:
+
+		# Tetris:
+T0 = pygame.image.load("...")
+T1 = pygame.image.load("...")
+T2 = pygame.image.load("...")
+T3 = pygame.image.load("...")
+T4 = pygame.image.load("...")
+T5 = pygame.image.load("...")
+
+		# Play:
+play = pygame.image.load("...")
+
+		# Option:
+option = pygame.image.load("...")
+
+
+
+pygame.display.set_caption("My Game")
+ 
+# Permet de fermer le jeu si l'utilisateur appuie sur la croix rouge en haut à droite
+done = False
+
+# gérer le rafraichissement de la fenêtre
+clock = pygame.time.Clock()
+ 
+while not done:
+    # --- Main event loop
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    # background image.
+    screen.fill(WHITE)
+
+
+        # --- Déssine la canevas écran du menu--- #
+    #fond du canevas
+    image = pygame.image.load("desert.jpg")
+    position = (0,0)
+    screen.blit(image, position)
+
+    #musique de fond
+#    musique=load(mus.mp3)
+#    musique_menu = pygame.mixer.music.load(musique)
+#    pygame.mixer.music.play()
+
+#    pygame.draw.rect(screen, BLACK, [75, 40, 775,675])
+#    pygame.draw.rect(screen, BLACK, [460, 80, 300, 200], 5)
+
+
+#   Boutons
+	
+    
+    
+
+
+
+
+    
+    # --- Go ahead and update the screen with what we've drawn.
+    pygame.display.flip()
+ 
+    # --- Limit to 60 frames per second
+    clock.tick(15)
+ 
+# Close the window and quit.
+pygame.quit()
